@@ -4,7 +4,7 @@ import './Video.css'
 const Video = (props) => {
     return(
         <div className="video" onClick={() => props.selectedVideo(props.video)}>
-            <img className="video-img" src={props.video.snippet.thumbnails.default.url}/>
+            <img className="video-img" src={props.video.snippet.thumbnails.default.url} alt={props.video.snippet.title}/>
             <div className="video-info">
                 <div className="video-title">{props.video.snippet.title}</div>
                 <div className="video-ch-title">{props.video.snippet.channelTitle}</div>

@@ -32,6 +32,7 @@ class App extends React.Component{
     }
 
     selectMainVideo = (video) => {
+        console.log(video)
         this.setState({headvideo: video})
     }
 
