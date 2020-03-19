@@ -16,7 +16,7 @@ class App extends React.Component{
         const response = await axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet', {
             params: {
                 q: {term},
-                key: "AIzaSyAq1mknbaqTlT0Mu56t1V1_P-NKtjc_BY8"
+                key: `${process.env.REACT_APP_YT_API}`
             }
         })
          this.setState({response: response, headvideo: response.data.items[0]})
