@@ -1,18 +1,18 @@
 import React from 'react'
-import axios from 'axios'
+import Video from './Video'
 
-const makeRequest = async (term) => {
-    const response = await axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet', {
-        query: {
-            q: term,
-            key: {process.env.REACT_APP_YOUTUBE_API}
+class VideoList extends React.Component {
+    render(){
+        if(this.props.response){
+            this.props.mainvideo(this.props.response.data.items[0])
+            return (
+                this.props.response.data.items.map(video => {
+                    return <Video key={video.id.videoId} video={video}/>
+                })
+            )
         }
-    })
-    console.log(response)
-}
-
-const VideoList = (props) => {
-    makeRequest(props.term)
+        return null
+    }
 }
 
 export default VideoList
