@@ -5,7 +5,18 @@
 .video-info{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
-    margin-left: 4px;
+    margin-left: 8px;
+}
+.video-title{
+    font-size: 1rem;
+    line-height: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+.video-ch-title{
+    font-size: 0.9rem;
+    color: dimgrey;
+    font-weight: 400;
 }

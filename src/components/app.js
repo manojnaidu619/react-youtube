@@ -4,18 +4,22 @@ import VideoList from './VideoList'
 import MainVideo from './MainVideo'
 import axios from 'axios'
 
-
 class App extends React.Component{
-    state = {term: null, response: null, headvideo: {}}
+    state = {term: null, response: null, headvideo: null}
+
+    constructor(props){
+        super(props)
+        this.makeRequest("Orange")
+    }
 
     async makeRequest(term){
         const response = await axios.get('https://www.googleapis.com/youtube/v3/search?part=snippet', {
             params: {
                 q: {term},
-                key: //Add key here as string
+                key: "AIzaSyAq1mknbaqTlT0Mu56t1V1_P-NKtjc_BY8"
             }
         })
-         this.setState({response})
+         this.setState({response: response, headvideo: response.data.items[0]})
     }
 
     onSearch = (term) => {
@@ -24,7 +28,10 @@ class App extends React.Component{
     }
 
     onSearchSuccess = (video) => {
-        console.log(video)
+        this.setState({headvideo: video})
+    }
+
+    selectMainVideo = (video) => {
         this.setState({headvideo: video})
     }
 
@@ -34,10 +41,14 @@ class App extends React.Component{
                 <SearchBar onTermSubmit={this.onSearch}/>
                 <div className="row">
                     <div className="col-md-8">
-                        <MainVideo/>
+                        <MainVideo video={this.state.headvideo}/>
                     </div>
                     <div className="col-md-4">
-                        <VideoList response={this.state.response} mainvideo={this.onSearchSuccess}/>
+                        <VideoList response={this.state.response} 
+                            mainvideo={this.onSearchSuccess} 
+                            currentMainVideo={this.state.headvideo}
+                            selectedVideo={this.selectMainVideo}
+                        />
                     </div>
                 </div>
             </div>
